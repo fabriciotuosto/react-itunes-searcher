@@ -39,7 +39,7 @@ gulp.task('styles', function () {
  * Clean generated source folders
  */
 gulp.task('clean', function (callback) {
-  del(['./public/js', './public/css'], callback);
+  del(['./public/js', './public/css', './public/fonts'], callback);
 });
 
 /**
@@ -47,6 +47,14 @@ gulp.task('clean', function (callback) {
  */
 gulp.task('watch', function () {
   return gulp.watch('src/**/*.{jsx,less}', ['styles', 'scripts']);
+});
+
+/**
+ * Copy Bootstrap fonts to deploy directory
+ */
+gulp.task('bootstrap:fonts', function(){
+  return gulp.src('./node_modules/bootstrap/fonts/*')
+    .pipe(gulp.dest('public/fonts'));
 });
 
 /**
@@ -70,4 +78,4 @@ gulp.task('open', function () {
 /*
  * Default Tasks
  */
-gulp.task('default', ['clean', 'connect', 'scripts', 'styles', 'watch', 'open']);
+gulp.task('default', ['clean', 'connect', 'scripts', 'styles', 'bootstrap:fonts', 'watch', 'open']);

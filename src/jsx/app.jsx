@@ -37,7 +37,7 @@ var search = function (term) {
 var keyups = Rx.Observable
   .fromEvent(document.querySelector('#q'), 'keyup')
   .map(term)
-  .debounce(100)
+  .debounce(500)
   .distinctUntilChanged()
   .flatMapLatest(search);
 
